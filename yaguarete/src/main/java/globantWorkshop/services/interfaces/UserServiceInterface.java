@@ -22,7 +22,7 @@ public interface UserServiceInterface {
      * Create a new user with an auto-generated id and email and name as passed
      * values.
      */
-    public User create(User user) throws PersistenceException;
+    public String create(User user) throws PersistenceException;
 
     /**
      * Delete the user with the passed id.

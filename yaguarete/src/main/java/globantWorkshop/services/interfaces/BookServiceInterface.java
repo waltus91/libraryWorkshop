@@ -26,7 +26,7 @@ public interface BookServiceInterface {
      * Delete the book with the passed id.
      */
 
-    public String delete(int id);
+    public String delete(Integer book);
 
     /**
      * Update the book atributes
@@ -38,5 +38,26 @@ public interface BookServiceInterface {
      */
     public Book findBookById(int bookId) throws TransactionSystemException;
 
+
+    // Repository methods
+    Iterable<Book> findAll();
+
+    Book findById(Integer id);
+
+    String save(Book book);
+
+    String update(Book book);
+
+    String delete(Book book);
+
+    String disable(Book book);
+
+    String enable(Book book);
+
+    Book findByName(String name);
+
+    Book findByIsbn(Integer isbn);
+
+    Iterable<Book> findByAuthor(String author);
 }
 

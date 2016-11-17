@@ -42,9 +42,13 @@ public class UserService implements UserServiceInterface {
     }
 
     @Override
-    public User create(User user) throws PersistenceException {
-        userDao.create(user);
-        return user;
+    public String create(User user) throws PersistenceException {
+        try {
+            userDao.create(user);
+            return "User successfully created!";
+        } catch (Exception ex) {
+            return "Error creating the user";
+        }
     }
 
     @Override

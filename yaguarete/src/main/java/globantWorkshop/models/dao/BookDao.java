@@ -22,30 +22,32 @@ private EntityManager entityManager;
 
 
     public void create(Book book) {
-        //Should Be implemented
+        entityManager.persist(book);
         return;
     }
 
     public void delete(Book book) {
-        //Should Be implemented
-            return;
+        if (entityManager.contains(book)) {
+            entityManager.remove(book);
+        } else {
+            entityManager.remove(entityManager.merge(book));
+        }
+
+        return;
     }
 
     @SuppressWarnings("unchecked")
     public List<Book> getAllBooks(){
-        //Should Be implemented
-        List bookList = new ArrayList<>();
-        return bookList;
+        return entityManager.createQuery("FROM Book").getResultList();
     }
 
     public void update(Book book) throws Exception{
-        //Should Be implemented
+        entityManager.merge(book);
         return;
     }
 
     public Book getById(int id) {
-    //Should Be implemented
-        return new Book();
+        return entityManager.find(Book.class, id);
     }
 
 }

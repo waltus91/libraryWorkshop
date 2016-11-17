@@ -5,12 +5,11 @@
  */
 package globantWorkshop.models.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import org.hibernate.validator.constraints.NotEmpty;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.util.Set;
 
 /**
  *
@@ -21,12 +20,24 @@ import javax.persistence.Table;
 public class Book{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "idbooks", nullable = false)
     private Integer idbooks;
 
+    @NotEmpty
     private String name;
+
+    @NotEmpty
     private String author;
+
+    @NotNull
     private Integer isbn;
+
+    private Integer year;
+    private Integer edition;
+    private String editorial;
+    private boolean enable;
+
+    @OneToMany(mappedBy = "book")
+    private Set<Order> orders;
 
     public Book() {
     }
@@ -67,6 +78,45 @@ public class Book{
         this.isbn = isbn;
     }
 
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getEdition() {
+        return edition;
+    }
+
+    public void setEdition(Integer edition) {
+        this.edition = edition;
+    }
+
+    public String getEditorial() {
+        return editorial;
+    }
+
+    public void setEditorial(String editorial) {
+        this.editorial = editorial;
+    }
+
+    public boolean isEnable() {
+        return enable;
+    }
+
+    public void setEnable(boolean enable) {
+        this.enable = enable;
+    }
+
+    public Set<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Set<Order> orders) {
+        this.orders = orders;
+    }
 
     @Override
     public int hashCode() {

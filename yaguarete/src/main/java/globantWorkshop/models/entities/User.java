@@ -5,11 +5,14 @@
  */
 package globantWorkshop.models.entities;
 
+import org.hibernate.validator.constraints.NotEmpty;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -18,19 +21,21 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "users")
-
 public class User implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer idUser;
 
+    @NotEmpty
     private String name;
 
+    @NotEmpty
     private String lastname;
 
     private String email;
 
+    @NotNull
     private Integer dni;
 
     private String address;
@@ -54,11 +59,11 @@ public class User implements Serializable {
         this.idUser = idUser;
     }
 
-    public Integer getIdusers() {
+    public Integer getIdUser() {
         return idUser;
     }
 
-    public void setIdusers(Integer idUser) {
+    public void setIdUser(Integer idUser) {
         this.idUser = idUser;
     }
 

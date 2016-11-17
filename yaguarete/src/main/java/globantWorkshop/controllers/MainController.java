@@ -8,10 +8,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class MainController {
 
   @RequestMapping("/")
-  @ResponseBody
   public String index() {
-    return "Proudly handcrafted by " +
-        "<a href='https://www.globant.com '>Globant</a> :)";
+    return "index";
   }
 
 }
