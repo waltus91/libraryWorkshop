@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:replace="fragments/head :: head"></th:block> /*/-->
+
+    <title>Listado de Usuarios</title>
+</head>
+<body>
+<!--/*/ <th:block th:replace="fragments/menu :: menu"></th:block> /*/-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="content-panel">
+                <h3><i class="glyphicon glyphicon-th-list"></i> Listado de los usuarios</h3>
+                <hr/>
+            </div>
+
+            <th:block th:if="${message != null}">
+                <div class="alert alert-warning alert-dismissible mt" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p th:text="${message}"></p>
+                </div>
+            </th:block>
+
+            <div class="content-panel mt" th:unless="${#lists.isEmpty(users)}">
+                <table class="table table-striped listado">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Apellido</th>
+                        <th>DNI</th>
+                        <th>Dirección</th>
+                        <th>Email</th>
+                        <th>Teléfono</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--/*/ <th:block th:each="user : ${users}"> /*/-->
+                    <tr>
+                        <td th:text="${user.name}">Nombre</td>
+                        <td th:text="${user.lastname}">Apellido</td>
+                        <td th:text="${user.dni}">DNI</td>
+                        <td th:text="${user.address}">Dirección</td>
+                        <td th:text="${user.email}">Email</td>
+                        <td th:text="${user.phone}">Teléfono</td>
+                        <td>
+                            <a class="btn btn-success btn-xs" href="#" th:href="@{/users/{id}/update(id=${user.idUser})}"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a class="btn btn-danger btn-xs" href="#" th:href="@{/users/{id}/delete(id=${user.idUser})}"><i class="glyphicon glyphicon-trash"></i></a>
+                        </td>
+                    </tr>
+                    <!--/*/ </th:block> /*/-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+
+<!--/*/ <th:block th:replace="fragments/foot :: foot"></th:block> /*/-->
+
+<script>
+    $('.listado').DataTable({
+        "columnDefs": [
+            { "orderable": false, "targets": 6 }
+        ]
+    });
+</script>
+</body>
+</html>

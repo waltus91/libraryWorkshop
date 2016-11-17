@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:replace="fragments/head :: head"></th:block> /*/-->
+
+    <title>Formulario Usuario</title>
+</head>
+<body>
+<!--/*/ <th:block th:replace="fragments/menu :: menu"></th:block> /*/-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="content-panel">
+                <h3><i class="glyphicon glyphicon-th-list"></i> Detalles del usuario</h3>
+                <hr/>
+            </div>
+            <div class="content-panel mt">
+                <form class="form-horizontal mb" th:action="@{/users/save}" th:object="${user}" method="POST">
+
+                    <th:block th:if="${#fields.hasErrors('${user.*}')}">
+                        <div class="alert alert-dismissable mt" th:classappend="'alert-danger'">
+                            <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                            <span th:text="${'El formulario contiene errores. Intente nuevamente.'}">Test</span>
+                        </div>
+                    </th:block>
+
+                    <input type="hidden" th:field="*{idUser}"/>
+
+                    <div class="form-group" th:classappend="${#fields.hasErrors('name')}? 'has-error'">
+                        <label for="name" class="col-xs-3 control-label">Nombre del Usuario:</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="name" th:field="*{name}" required="true"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Incorrect</span>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('lastname')}? 'has-error'">
+                        <label for="lastname" class="col-xs-3 control-label">Apellido del Usuario:</label>
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="lastname" th:field="*{lastname}" required="true"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}">Incorrect</span>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('dni')}? 'has-error'">
+                        <label class="control-label col-xs-3" for="dni">DNI:</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" type="text" id="dni" th:field="*{dni}" required="true"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('dni')}" th:errors="*{dni}">Incorrect</span>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('address')}? 'has-error'">
+                        <label class="control-label col-xs-3" for="address">Dirección:</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" type="text" id="address" th:field="*{address}"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('address')}" th:errors="*{address}">Incorrect</span>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('email')}? 'has-error'">
+                        <label class="control-label col-xs-3" for="email">Email:</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" type="email" id="email" th:field="*{email}"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Incorrect</span>
+                        </div>
+                    </div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('phone')}? 'has-error'">
+                        <label class="control-label col-xs-3" for="phone">Teléfono:</label>
+                        <div class="col-xs-8">
+                            <input class="form-control" type="text" id="phone" th:field="*{phone}"/>
+                            <span class="help-block" th:if="${#fields.hasErrors('phone')}" th:errors="*{phone}">Incorrect</span>
+                        </div>
+                    </div>
+                    <div class="pull-right" style="margin-right: 95px">
+                        <button type="reset" class="btn btn-default mr">Cancelar</button>
+                        <button type="submit" class="btn btn-success">Guardar</button>
+                    </div>
+                    <div class="clearfix"></div>
+                </form>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+
+<!--/*/ <th:block th:replace="fragments/foot :: foot"></th:block> /*/-->
+</body>
+</html>

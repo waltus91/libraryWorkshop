@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <!--/*/ <th:block th:replace="fragments/head :: head"></th:block> /*/-->
+
+    <title>Listado de Libros</title>
+</head>
+<body>
+<!--/*/ <th:block th:replace="fragments/menu :: menu"></th:block> /*/-->
+
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="content-panel">
+                <h3><i class="glyphicon glyphicon-th-list"></i> Listado de los libros</h3>
+                <hr/>
+            </div>
+
+            <th:block th:if="${message != null}">
+                <div class="alert alert-info alert-dismissible mt" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <p th:text="${message}"></p>
+                </div>
+            </th:block>
+
+            <div class="content-panel mt" th:unless="${#lists.isEmpty(books)}">
+                <table class="table table-striped listado">
+                    <thead>
+                    <tr>
+                        <th>Nombre</th>
+                        <th>Autor</th>
+                        <th>ISBN</th>
+                        <th>Año</th>
+                        <th>Edición</th>
+                        <th>Editorial</th>
+                        <th>Activo</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!--/*/ <th:block th:each="book : ${books}"> /*/-->
+                    <tr>
+                        <td th:text="${book.name}">Nombre</td>
+                        <td th:text="${book.author}">Autor</td>
+                        <td th:text="${book.isbn}">ISBN</td>
+                        <td th:text="${book.year}">Año</td>
+                        <td th:text="${book.edition}">Edición</td>
+                        <td th:text="${book.editorial}">Editorial</td>
+                        <td th:text="${book.enable}? 'SI' : 'NO'">Activo</td>
+                        <td>
+                            <a class="btn btn-success btn-xs" href="#" th:href="@{/books/{id}/update(id=${book.idbooks})}"><i class="glyphicon glyphicon-pencil"></i></a>
+                            <a class="btn btn-danger btn-xs" href="#" th:href="@{/books/{id}/delete(id=${book.idbooks})}"><i class="glyphicon glyphicon-trash"></i></a>
+                            <a th:if="${book.enable}" class="btn btn-warning btn-xs" href="#" th:href="@{/books/{id}/disable(id=${book.idbooks})}"><i class="glyphicon glyphicon-ban-circle"></i></a>
+                            <a th:unless="${book.enable}" class="btn btn-warning btn-xs" href="#" th:href="@{/books/{id}/enable(id=${book.idbooks})}"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                        </td>
+                    </tr>
+                    <!--/*/ </th:block> /*/-->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div> <!-- /.row -->
+</div> <!-- /.container -->
+
+<!--/*/ <th:block th:replace="fragments/foot :: foot"></th:block> /*/-->
+
+<script>
+    $('.listado').DataTable({
+        "columnDefs": [
+            { "orderable": false, "targets": 7 }
+        ]
+    });
+</script>
+</body>
+</html>
